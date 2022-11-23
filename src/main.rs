@@ -2,7 +2,7 @@ fn main() {
     println!("Hello, world!");
 }
 
-fn math(mut n: u64, mut m: u64) -> u64 {
+fn math(n: u64, m: u64) -> u64 {
     return n + m;  
 }
 
