@@ -1,3 +1,4 @@
+use add_numbers::add_two;
 use axum::{
     response::Html, routing::{get, post}, Router, Json,
     http::StatusCode,
@@ -6,6 +7,8 @@ use axum::{
 use std::net::SocketAddr;
 use serde::{Deserialize, Serialize};
 
+// module
+pub mod add_numbers;
 
 
 
@@ -42,6 +45,7 @@ async fn create_user(
     let user = User {
         id: 1337,
         username: payload.username,
+        num: add_two(500)
     };
 
     // this will be converted into a JSON response
@@ -61,5 +65,6 @@ struct CreateUser {
 struct User {
     id: u64,
     username: String,
+    num: i32,
 }
 
