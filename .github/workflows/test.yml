@@ -4,7 +4,7 @@ name: CI
 
 jobs:
   build_and_test:
-    name: Rust test
+    name: Rust project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,4 +13,5 @@ jobs:
           toolchain: stable
       - uses: actions-rs/cargo@v1
         with:
-          command: cargo test
+          command: test
+          # args: --release --all-features
