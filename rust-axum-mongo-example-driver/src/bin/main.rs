@@ -1,4 +1,3 @@
-use add_numbers::add_two;
 use axum::{
     response::Html, routing::{get, post}, Router, Json,
     http::StatusCode,
@@ -7,18 +6,25 @@ use axum::{
 use std::net::SocketAddr;
 use serde::{Deserialize, Serialize};
 
-// module
-pub mod add_numbers;
+
 
 
 
 #[tokio::main]  // main関数を非同期関数にするために必要
 async fn main() {
+    // init
     if std::env::var_os("RUST_LOG").is_none() {
         std::env::set_var("RUST_LOG", "rustwi=debug")
     }
     tracing_subscriber::fmt::init();
 
+    // db
+   
+
+    
+
+
+    // router
     let app = Router::new()
         .route("/", get(handler))
         .route("/users", post(create_user));
@@ -45,7 +51,7 @@ async fn create_user(
     let user = User {
         id: 1337,
         username: payload.username,
-        num: add_two(500)
+        num: 4444,
     };
 
     // this will be converted into a JSON response
