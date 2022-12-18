@@ -18,9 +18,10 @@ async fn main() {
     tracing_subscriber::fmt::init();
 
     // db
-   
+    print!("{}", "s");
 
     
+
 
 
     // router
