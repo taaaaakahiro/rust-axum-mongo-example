@@ -9,7 +9,6 @@ use serde::{Deserialize, Serialize};
 
 
 
-
 #[tokio::main]  // main関数を非同期関数にするために必要
 async fn main() {
     // init
