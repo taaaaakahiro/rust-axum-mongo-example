@@ -4,9 +4,15 @@ use axum::{
     response::IntoResponse,
 };
 use std::net::SocketAddr;
+use std::process;
+use envy;
 use serde::{Deserialize, Serialize};
 
 
+#[derive(Deserialize, Debug)]
+struct Config {
+  port: u16,
+}
 
 
 #[tokio::main]  // main関数を非同期関数にするために必要
@@ -16,6 +22,14 @@ async fn main() {
         std::env::set_var("RUST_LOG", "rustwi=debug")
     }
     tracing_subscriber::fmt::init();
+    // load env
+    let config = match envy::from_env::<Config>() {
+        Ok(val) => val,
+        Err(err) => {
+            println!("{}", err);
+            process::exit(1);
+        }
+    };
 
     // db
     print!("{}", "s");
@@ -29,7 +43,7 @@ async fn main() {
         .route("/", get(handler))
         .route("/users", post(create_user));
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
+    let addr = SocketAddr::from(([127, 0, 0, 1], config.port));
     tracing::debug!("listening on {}", addr);
     axum::Server::bind(&addr)
         .serve(app.into_make_service())

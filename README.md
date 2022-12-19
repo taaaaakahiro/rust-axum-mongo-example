@@ -16,6 +16,12 @@ $ curl -X POST -H "Content-Type: application/json" localhost:3000/users -d '{"us
 
 ```
 
+### Architecture
+    1. driver: router, server  
+    2. app: usecase
+    3. kernel: domain
+    4. adapter: query, external
+
 ### Articles
 1. axum
     - https://zenn.dev/msakuta/articles/83f9991b2aba62
