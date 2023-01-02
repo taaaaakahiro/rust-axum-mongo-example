@@ -3,8 +3,10 @@ use axum::{
     http::StatusCode,
     response::IntoResponse,
 };
-use std::net::SocketAddr;
-use std::process;
+use std::{
+    net::SocketAddr,
+    process
+};
 
 use envy;
 use serde::{Deserialize, Serialize};
