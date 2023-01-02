@@ -1,5 +1,5 @@
 [package]
-name = "rust-axum-mongo-example-app"
+name = "rust-axum-app"
 version = "0.1.0"
 edition = "2021"
 

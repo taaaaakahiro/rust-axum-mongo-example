@@ -1,9 +1,9 @@
 [package]
-name = "rust-axum-mongo-example-adapter"
+name = "rust-axum-adapter"
 version = "0.1.0"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rust-axum-mongo-example-kernel = { path = "../rust-axum-mongo-example-kernel" }
+rust-axum-kernel = { path = "../rust-axum-kernel" }

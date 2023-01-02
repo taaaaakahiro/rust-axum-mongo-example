@@ -1,7 +1,7 @@
 [workspace]
 members = [
-    "rust-axum-mongo-example-driver",
-    "rust-axum-mongo-example-adapter",
-    "rust-axum-mongo-example-app",
-    "rust-axum-mongo-example-kernel"
+    "rust-axum-driver",
+    "rust-axum-adapter",
+    "rust-axum-app",
+    "rust-axum-kernel"
 ]

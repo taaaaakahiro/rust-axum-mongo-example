@@ -1,5 +1,5 @@
 [package]
-name = "rust-axum-mongo-example-driver"
+name = "rust-axum-driver"
 version = "0.1.0"
 edition = "2021"
 
@@ -7,9 +7,9 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rust-axum-mongo-example-kernel = { path = "../rust-axum-mongo-example-kernel" }
-rust-axum-mongo-example-app = { path = "../rust-axum-mongo-example-app" }
-rust-axum-mongo-example-adapter = { path = "../rust-axum-mongo-example-adapter" }
+rust-axum-kernel = { path = "../rust-axum-kernel" }
+rust-axum-app = { path = "../rust-axum-app" }
+rust-axum-adapter = { path = "../rust-axum-adapter" }
 axum = "0.4"
 tokio = { version = "1.0", features = ["full"] }
 tracing = "0.1"

@@ -1,5 +1,5 @@
 [package]
-name = "rust-axum-mongo-example-kernel"
+name = "rust-axum-kernel"
 version = "0.1.0"
 edition = "2021"
 
