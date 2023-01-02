@@ -2,6 +2,9 @@ on: [push]
 
 name: CI
 
+env:
+  PORT: 8080
+
 jobs:
   build_and_test:
     name: Rust project
@@ -15,3 +18,5 @@ jobs:
         with:
           command: test
           # args: -p rust-axum-driver --lib
+        env:
+          PORT: ${{ env.PORT }}
