@@ -13,5 +13,5 @@ jobs:
           toolchain: stable
       - uses: actions-rs/cargo@v1
         with:
-          command: test --lib
-          # args: --release --all-features
+          command: test
+          args: --lib
