@@ -30,6 +30,7 @@ $ curl -X POST -H "Content-Type: application/json" localhost:8080/users -d '{"us
 2. axum
     - https://zenn.dev/msakuta/articles/83f9991b2aba62
     - https://blog-dry.com/entry/2021/12/26/002649
+    - https://crates.io/crates/axum
 3. layered architecture
     - https://buildersbox.corp-sansan.com/entry/2019/04/21/000000_1
     
