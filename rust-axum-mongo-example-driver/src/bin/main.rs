@@ -5,6 +5,7 @@ use axum::{
 };
 use std::net::SocketAddr;
 use std::process;
+
 use envy;
 use serde::{Deserialize, Serialize};
 
@@ -22,6 +23,7 @@ async fn main() {
         std::env::set_var("RUST_LOG", "rustwi=debug")
     }
     tracing_subscriber::fmt::init();
+
     // load env
     let config = match envy::from_env::<Config>() {
         Ok(val) => val,

@@ -22,10 +22,14 @@ $ curl -X POST -H "Content-Type: application/json" localhost:3000/users -d '{"us
     3. kernel: domain
     4. adapter: query, external
 
-### Articles
-1. axum
+### Docs & Article
+1. Rust
+    - https://doc.rust-jp.rs/rust-by-example-ja/index.html
+    - https://play.rust-lang.org/
+
+2. axum
     - https://zenn.dev/msakuta/articles/83f9991b2aba62
     - https://blog-dry.com/entry/2021/12/26/002649
-2. layered architecture
+3. layered architecture
     - https://buildersbox.corp-sansan.com/entry/2019/04/21/000000_1
     
