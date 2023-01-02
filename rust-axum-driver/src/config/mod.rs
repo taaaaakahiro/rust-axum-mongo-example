@@ -22,9 +22,12 @@ pub fn load_confg()->Config{
 
 #[cfg(test)]
 mod tests {
+    use crate::config::{Config, load_confg};
+
     #[test]
     fn load_config() {
-        assert_eq!(2 + 2, 4);
+        let cfg: Config = load_confg();
+        assert_eq!(cfg.port, 8080);
     }
 }
 
