@@ -13,5 +13,5 @@ jobs:
           toolchain: stable
       - uses: actions-rs/cargo@v1
         with:
-          command: test -p rust-axum-driver --lib
+          command: test
           # args: -p rust-axum-driver --lib
