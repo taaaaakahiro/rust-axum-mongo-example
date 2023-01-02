@@ -5,18 +5,9 @@ use axum::{
 };
 use std::{
     net::SocketAddr,
-    process
 };
-
-use envy;
 use serde::{Deserialize, Serialize};
-
-
-#[derive(Deserialize, Debug)]
-struct Config {
-  port: u16,
-}
-
+use rust_axum_driver::config::load_confg;
 
 #[tokio::main]  // main関数を非同期関数にするために必要
 async fn main() {
@@ -27,13 +18,16 @@ async fn main() {
     tracing_subscriber::fmt::init();
 
     // load env
-    let config = match envy::from_env::<Config>() {
-        Ok(val) => val,
-        Err(err) => {
-            println!("{}", err);
-            process::exit(1);
-        }
-    };
+    // let config = match envy::from_env::<Config>() {
+    //     Ok(val) => val,
+    //     Err(err) => {
+    //         println!("{}", err);
+    //         process::exit(1);
+    //     }
+    // };
+
+    let config = load_confg();
+
 
     // db
     print!("{}", "s");
