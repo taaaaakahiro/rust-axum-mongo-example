@@ -25,7 +25,7 @@ mod tests {
     use crate::config::{Config, load_confg};
 
     #[test]
-    fn load_config() {
+    fn test_load_config() {
         let cfg: Config = load_confg();
         assert_eq!(cfg.port, 8080);
     }

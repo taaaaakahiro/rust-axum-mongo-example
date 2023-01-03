@@ -8,11 +8,12 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      # MONGO_INITDB_DATABASE: example
     ports:
       - 27017:27017
-    # volumes:
-    #   - ./mongo:/data/db
-    #   - ./mongo:/data/configdb
+    volumes:
+      - ./mongo:/data/db
+      - ./mongo:/data/configdb
 
   mongo-express:
     container_name: mongo_express

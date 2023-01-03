@@ -7,3 +7,8 @@ edition = "2021"
 
 [dependencies]
 rust-axum-kernel = { path = "../rust-axum-kernel" }
+
+[dependencies.mongodb]
+version = "2.3.0"
+default-features = false
+features = ["tokio-runtime"]
