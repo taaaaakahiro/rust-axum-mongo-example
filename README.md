@@ -1,10 +1,14 @@
 # rust-example
 
 ### cmd
-```
+```rust
 $ cargo run
 $ cargo --version
 $ rustup update
+```
+```mongo
+$ docker-compose exec mongo sh
+$ mongosh -u root -p password
 ```
 
 ### Axum

@@ -1,0 +1,1 @@
+mongoimport --db example --collection user --drop --file /docker-entrypoint-initdb.d/user.json --jsonArray
