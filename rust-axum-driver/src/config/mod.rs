@@ -1,15 +1,13 @@
-use serde::{Deserialize};
+use serde::Deserialize;
 
-use std::{
-    process
-};
+use std::process;
 
 #[derive(Deserialize, Debug)]
 pub struct Config {
-   pub port: u16,
+    pub port: u16,
 }
 
-pub fn load_confg()->Config{
+pub fn load_confg() -> Config {
     let config = match envy::from_env::<Config>() {
         Ok(val) => val,
         Err(err) => {
@@ -22,7 +20,7 @@ pub fn load_confg()->Config{
 
 #[cfg(test)]
 mod tests {
-    use crate::config::{Config, load_confg};
+    use crate::config::{load_confg, Config};
 
     #[test]
     fn test_load_config() {
@@ -30,6 +28,3 @@ mod tests {
         assert_eq!(cfg.port, 8080);
     }
 }
-
-
-

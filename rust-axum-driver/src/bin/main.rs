@@ -1,15 +1,15 @@
 use axum::{
-    response::Html, routing::{get, post}, Router, Json,
     http::StatusCode,
+    response::Html,
     response::IntoResponse,
+    routing::{get, post},
+    Json, Router,
 };
-use std::{
-    net::SocketAddr,
-};
-use serde::{Deserialize, Serialize};
 use rust_axum_driver::config::load_confg;
+use serde::{Deserialize, Serialize};
+use std::net::SocketAddr;
 
-#[tokio::main]  // main関数を非同期関数にするために必要
+#[tokio::main] // main関数を非同期関数にするために必要
 async fn main() {
     // init
     if std::env::var_os("RUST_LOG").is_none() {
@@ -28,13 +28,8 @@ async fn main() {
 
     let config = load_confg();
 
-
     // db
     print!("{}", "s");
-
-    
-
-
 
     // router
     let app = Router::new()
@@ -53,7 +48,6 @@ async fn handler() -> Html<&'static str> {
     Html("<h1>Hello, World!</h1>")
 }
 
-
 async fn create_user(
     // this argument tells axum to parse the request body
     // as JSON into a `CreateUser` type
@@ -70,7 +64,6 @@ async fn create_user(
     // with a status code of `201 Created`
     (StatusCode::CREATED, Json(user))
 }
-
 
 // the input to our `create_user` handler
 #[derive(Deserialize)]
@@ -93,4 +86,3 @@ mod tests {
         assert_eq!(2 + 2, 4);
     }
 }
-

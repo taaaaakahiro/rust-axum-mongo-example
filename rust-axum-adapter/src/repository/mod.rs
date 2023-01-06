@@ -1,7 +1,6 @@
 use crate::persistence::mongodb::Db;
 use std::marker::PhantomData;
 
-
 pub struct MongoDBRepositoryImpl<T> {
     db: Db,
     _marker: PhantomData<T>,
