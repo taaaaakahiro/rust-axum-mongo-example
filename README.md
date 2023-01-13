@@ -2,9 +2,12 @@
 
 ### cmd
 ```rust
-$ cargo run
-$ cargo --version
-$ rustup update
+$ cargo run // run project
+$ cargo --version // check version
+$ rustup update // update crates
+$ cargo new --bin adder // create crate
+$ cargo new add-one --lib // create library crate
+$ cargo test -p xxx // run test, select specific crate
 ```
 ```mongo
 $ docker-compose exec mongo sh
