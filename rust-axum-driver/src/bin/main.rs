@@ -1,12 +1,6 @@
-use axum::{
-    http::StatusCode,
-    response::Html,
-    response::IntoResponse,
-    routing::{get, post},
-    Json, Router,
-};
-use rust_axum_driver::config::load_confg;
-use serde::{Deserialize, Serialize};
+use axum::{http::StatusCode, response::Html, response::IntoResponse, routing::get, Json, Router};
+use rust_axum_driver::config::Config;
+use rust_axum_kernel::model::user;
 use std::net::SocketAddr;
 
 #[tokio::main] // main関数を非同期関数にするために必要
@@ -16,25 +10,14 @@ async fn main() {
         std::env::set_var("RUST_LOG", "rustwi=debug")
     }
     tracing_subscriber::fmt::init();
-
-    // load env
-    // let config = match envy::from_env::<Config>() {
-    //     Ok(val) => val,
-    //     Err(err) => {
-    //         println!("{}", err);
-    //         process::exit(1);
-    //     }
-    // };
-
-    let config = load_confg();
+    let config = Config::new();
 
     // db
-    print!("{}", "s");
 
     // router
     let app = Router::new()
         .route("/", get(handler))
-        .route("/users", post(create_user));
+        .route("/user", get(get_user));
 
     let addr = SocketAddr::from(([127, 0, 0, 1], config.port));
     tracing::debug!("listening on {}", addr);
@@ -48,35 +31,20 @@ async fn handler() -> Html<&'static str> {
     Html("<h1>Hello, World!</h1>")
 }
 
-async fn create_user(
+async fn get_user(
     // this argument tells axum to parse the request body
     // as JSON into a `CreateUser` type
-    Json(payload): Json<CreateUser>,
+    Json(payload): Json<user::RequestUser>,
 ) -> impl IntoResponse {
     // insert your application logic here
-    let user = User {
-        id: 1337,
-        username: payload.username,
-        num: 4444,
+    let user = user::User {
+        id: payload.id,
+        name: payload.name,
     };
 
     // this will be converted into a JSON response
     // with a status code of `201 Created`
     (StatusCode::CREATED, Json(user))
-}
-
-// the input to our `create_user` handler
-#[derive(Deserialize)]
-struct CreateUser {
-    username: String,
-}
-
-// the output to our `create_user` handler
-#[derive(Serialize)]
-struct User {
-    id: u64,
-    username: String,
-    num: i32,
 }
 
 #[cfg(test)]

@@ -1,6 +1,6 @@
 # rust-example
 
-### cmd
+## Cmd
 ```sh
 # Rust
 $ cargo run # run project
@@ -17,18 +17,26 @@ $ docker-compose exec mongo sh
 $ mongosh -u root -p password
 ```
 
-### Http Request
+## Http Request/Response
+### Request
 ```sh
 $ curl -X GET -H "Content-Type: application/json" localhost:8080
-$ curl -X POST -H "Content-Type: application/json" localhost:8080/users -d '{"username" : "user1"}' 
+$ curl -X GET -H "Content-Type: application/json" localhost:8080/user -d '{"id": "1", "name" : "user1"}'
+```
+### Response
+```json
+{
+    "id":"1",
+    "name":"user1"
+}
 
 ```
 
 ### Architecture
-1. driver: router, server  
-2. app: usecase
-3. kernel: domain
-4. adapter: query, external
+    1. driver: router, server  
+    2. app: usecase
+    3. kernel: domain
+    4. adapter: query, external
 
 ### Docs & Article
 1. Rust
