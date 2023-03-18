@@ -1,4 +1,4 @@
-# rust-example
+# rust_axum_mongo_example
 
 ## Cmd
 ```sh
