@@ -6,24 +6,25 @@
 $ cargo run # run project
 $ cargo --version # check version
 $ rustup update # update crates
-$ cargo new --bin adder # create crate
-$ cargo new add-one --lib # create library crate
+$ cargo new --bin adder # create main.rs & Cargo.toml
+$ cargo new <CRATE_NAME> --lib # create crate
 $ cargo test -p xxx # run test, select specific crate
 
 # Docker
-$ docker-compose exec mongo sh
+$ docker-compose up -d # run mongo
+$ docker-compose exec mongo sh # exec mongo
 
 # MongoDB
-$ mongosh -u root -p password
+$ mongosh -u root -p password # login mongo
 ```
 
 ## Http Request/Response
-### Request
+### Ex.Request
 ```sh
 $ curl -X GET -H "Content-Type: application/json" localhost:8080
 $ curl -X GET -H "Content-Type: application/json" localhost:8080/user -d '{"id": "1", "name" : "user1"}'
 ```
-### Response
+### Ex.Response
 ```json
 {
     "id":"1",
@@ -33,10 +34,10 @@ $ curl -X GET -H "Content-Type: application/json" localhost:8080/user -d '{"id":
 ```
 
 ### Architecture
-    1. driver: router, server  
-    2. app: usecase
-    3. kernel: domain
-    4. adapter: query, external
+1. driver: router, server  
+2. app: usecase
+3. kernel: domain
+4. adapter: query, external
 
 ### Docs & Article
 1. Rust
