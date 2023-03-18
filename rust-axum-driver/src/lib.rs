@@ -1,2 +1,3 @@
 pub mod config;
-pub mod route;
+pub mod routes;
+pub mod startup;
