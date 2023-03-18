@@ -7,6 +7,9 @@ edition = "2021"
 
 [dependencies]
 rust-axum-kernel = { path = "../rust-axum-kernel" }
+anyhow = "1.0.58"
+async-trait = "0.1.56"
+serde = { version = "1.0.140", features = ["derive"] }
 
 [dependencies.mongodb]
 version = "2.3.0"
