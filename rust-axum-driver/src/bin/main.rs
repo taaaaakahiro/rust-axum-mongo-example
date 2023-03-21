@@ -1,4 +1,6 @@
-use rust_axum_driver::{config::Config, startup::startup};
+use std::sync::Arc;
+
+use rust_axum_driver::{config::Config, module::Modules, startup::startup};
 
 #[tokio::main] //main関数を非同期関数にする
 async fn main() {
@@ -8,5 +10,6 @@ async fn main() {
     }
     tracing_subscriber::fmt::init();
     let cfg = Config::new();
-    let _ = startup(&cfg).await;
+    let modules = Modules::new().await;
+    let _ = startup(&cfg, Arc::new(modules)).await;
 }
