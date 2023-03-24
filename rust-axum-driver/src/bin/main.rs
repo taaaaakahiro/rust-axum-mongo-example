@@ -1,15 +1,12 @@
-use std::sync::Arc;
-
-use rust_axum_driver::{config::Config, module::Modules, startup::startup};
+use rust_axum_driver::{config::Config, startup::init_app, startup::startup};
 
 #[tokio::main] //main関数を非同期関数にする
-async fn main() {
+async fn main() -> anyhow::Result<()> {
     // init
-    if std::env::var_os("RUST_LOG").is_none() {
-        std::env::set_var("RUST_LOG", "rustwi=debug")
-    }
-    tracing_subscriber::fmt::init();
+    init_app();
+
     let cfg = Config::new();
-    let modules = Modules::new().await;
-    let _ = startup(&cfg, Arc::new(modules)).await;
+    let _ = startup(&cfg).await;
+
+    Ok(())
 }

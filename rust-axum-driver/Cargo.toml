@@ -10,10 +10,18 @@ edition = "2021"
 rust-axum-kernel = { path = "../rust-axum-kernel" }
 rust-axum-app = { path = "../rust-axum-app" }
 rust-axum-adapter = { path = "../rust-axum-adapter" }
-axum = "0.6.1"
-tokio = { version = "1.0", features = ["full"] }
-tracing = "0.1"
-tracing-subscriber = { version="0.3", features = ["env-filter"] }
-serde = { version = "1.0.136", features = ["derive"] }
+axum = { version = "0.6.12", features = ["multipart"] }
+tokio = { version = "1.12.0", features = ["rt", "macros", "test-util"] }
+serde = { version = "1.0.130", features = ["derive"] }
+derive-new = "0.5.9"
+anyhow = "1.0.44"
+futures = { version = "0.3.17", features = ["executor"] }
+validator = { version = "0.16.0", features = ["derive"] }
+http-body = "0.4.3"
+thiserror = "1.0.30"
+tracing = "0.1.29"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+dotenv = "0.15.0"
+csv = "1.1.6"
 envy = "0.4"
-tower-http = { version = "0.3.4", features = ["cors"] }
+tower-http = { version = "0.4.0", features = ["cors"] }
