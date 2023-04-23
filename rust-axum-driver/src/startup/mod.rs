@@ -16,7 +16,7 @@ use tower_http::cors::{Any, CorsLayer};
 
 pub async fn startup(cfg: &Config) {
     let cors = CorsLayer::new()
-        .allow_methods([Method::GET, Method::OPTIONS, Method::HEAD])
+        .allow_methods([Method::GET, Method::OPTIONS])
         .allow_origin(Any);
 
     let app = Router::new()
