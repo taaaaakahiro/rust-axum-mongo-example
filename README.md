@@ -19,10 +19,13 @@ $ mongosh -u root -p password # login mongo
 ```
 
 ## Http Request/Response
-### Ex.Request
+### health check
 ```sh
 $ curl -X GET -H "Content-Type: application/json" localhost:8080
-$ curl -X GET -H "Content-Type: application/json" localhost:8080/user -d '{"id": "1", "name" : "user1"}'
+```
+### Ex.Request
+```sh
+$ curl -X GET -H "Content-Type: application/json" localhost:8080/user/1
 ```
 ### Ex.Response
 ```json

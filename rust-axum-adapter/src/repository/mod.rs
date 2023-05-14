@@ -1,18 +1,14 @@
 use crate::persistence::mongodb::Db;
-use std::marker::PhantomData;
 
 pub mod health_check;
+pub mod user;
 
-pub struct MongoDBRepositoryImpl<T> {
-    _db: Db,
-    _marker: PhantomData<T>,
+pub struct MongoDBRepositoryImpl {
+    db: Db,
 }
 
-impl<T> MongoDBRepositoryImpl<T> {
+impl MongoDBRepositoryImpl {
     pub fn new(db: Db) -> Self {
-        Self {
-            _db: db,
-            _marker: PhantomData,
-        }
+        Self { db: db }
     }
 }

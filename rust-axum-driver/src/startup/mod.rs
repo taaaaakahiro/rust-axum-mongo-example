@@ -2,7 +2,7 @@ use crate::{
     config::Config,
     routes::{
         health::{hc, html},
-        user::user::{create_user, get_user},
+        user::user::{get_user, post_user},
     },
 };
 use axum::{
@@ -21,7 +21,7 @@ pub async fn startup(cfg: &Config) {
 
     let app = Router::new()
         .route("/", get(html))
-        .route("/user", post(create_user))
+        .route("/user", post(post_user))
         .route("/user/:id", get(get_user))
         .route("/hc", get(hc))
         .layer(cors);
