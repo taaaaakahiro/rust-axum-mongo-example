@@ -1,6 +1,6 @@
 # rust_axum_mongo_example
 
-## Cmd
+## CMD
 ```sh
 # Rust
 $ cargo run # run project
@@ -37,11 +37,11 @@ $ curl -X GET -H "Content-Type: application/json" localhost:8080/user/1
 }
 ```
 
-### Architecture
-1. driver: router, server  
-2. app: usecase
-3. kernel: domain
-4. adapter: query, external
+### Architecture ~layered architecture~
+- driver: router, server
+- app: business logic 
+- kernel: domain 
+- adapter: query, external
 
 ### Docs & Article
 1. Rust
