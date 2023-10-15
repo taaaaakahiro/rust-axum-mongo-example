@@ -18,11 +18,10 @@ $ docker-compose exec mongo sh # exec mongo
 $ mongosh -u root -p password # login mongo
 ```
 
-
-
 ## Http Request/Response
 ### health check
 ```sh
+$ make run # run api
 $ curl -X GET -H "Content-Type: application/json" localhost:8080
 ```
 ### Ex.Request
@@ -36,6 +35,12 @@ $ curl -X GET -H "Content-Type: application/json" localhost:8080/user/1
     "name":"user1"
 }
 ```
+
+### PORT
+* 8080: api  
+* 8081: mongo exporess
+* 27017: mongo db  
+ 
 
 ### Architecture ~layered architecture~
 - driver: router, server
