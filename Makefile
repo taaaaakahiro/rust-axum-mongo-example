@@ -6,3 +6,5 @@ test:
 	cargo test
 fmt:
 	cargo fmt
+
+.PHONY: watch run test fmt

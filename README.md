@@ -1,6 +1,6 @@
 # rust_axum_mongo_example
 
-## Cmd
+## CMD
 ```sh
 # Rust
 $ cargo run # run project
@@ -11,7 +11,7 @@ $ cargo new <CRATE_NAME> --lib # create crate
 $ cargo test -p xxx # run test, select specific crate
 
 # Docker
-$ docker-compose up -d # run mongo
+$ docker-compose up -d # mongo compass `localhost:8081` &  rust api `localhost:27017`
 $ docker-compose exec mongo sh # exec mongo
 
 # MongoDB
@@ -21,6 +21,7 @@ $ mongosh -u root -p password # login mongo
 ## Http Request/Response
 ### health check
 ```sh
+$ make run # run api
 $ curl -X GET -H "Content-Type: application/json" localhost:8080
 ```
 ### Ex.Request
@@ -33,14 +34,19 @@ $ curl -X GET -H "Content-Type: application/json" localhost:8080/user/1
     "id":"1",
     "name":"user1"
 }
-
 ```
 
-### Architecture
-1. driver: router, server  
-2. app: usecase
-3. kernel: domain
-4. adapter: query, external
+### PORT
+* 8080: api  
+* 8081: mongo exporess
+* 27017: mongo db  
+ 
+
+### Architecture ~layered architecture~
+- driver: router, server
+- app: business logic 
+- kernel: domain 
+- adapter: query, external
 
 ### Docs & Article
 1. Rust
@@ -52,6 +58,8 @@ $ curl -X GET -H "Content-Type: application/json" localhost:8080/user/1
     - https://zenn.dev/codemountains/articles/b3c9c176d821e7
     - https://blog-dry.com/entry/2021/12/26/002649
     - https://crates.io/crates/axum
+    - https://powell1213.com/2023/03/02/rust-api-server/
+
 3. layered architecture
     - https://buildersbox.corp-sansan.com/entry/2019/04/21/000000_1
     

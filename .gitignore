@@ -6,3 +6,6 @@ Cargo.lock
 
 # mongo
 /mongo
+
+*.idea
+*.xml
