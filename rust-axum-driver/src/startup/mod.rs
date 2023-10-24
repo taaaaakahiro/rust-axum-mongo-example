@@ -27,7 +27,7 @@ pub async fn startup(cfg: &Config) {
         .layer(cors);
 
     let addr = SocketAddr::from(([127, 0, 0, 1], cfg.port));
-    tracing::info!("Server listening on {}", addr);
+    tracing::info!("Server Listening on {}", addr);
 
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
