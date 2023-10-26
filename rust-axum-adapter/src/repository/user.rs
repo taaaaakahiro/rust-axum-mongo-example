@@ -28,15 +28,15 @@ mod test {
     // use rust_axum_kernel::model::Id;
 
     #[tokio::test]
-    async  fn it_works(){
+    async fn it_works() {
         assert_eq!(1 + 2, 3);
     }
     #[test]
-     fn demo_test() {
+    fn demo_test() {
         assert_eq!(1 + 2, 3); //仮
-        //TODO: 後で
-        // let db = Db::new().await;
-        // let id = "63b5700f67a2592b8942f971";
-        // let got = MongoDBRepositoryImpl::assert_eq!(2 + 2, got.try_into());
+                              //TODO: 後で
+                              // let db = Db::new().await;
+                              // let id = "63b5700f67a2592b8942f971";
+                              // let got = MongoDBRepositoryImpl::assert_eq!(2 + 2, got.try_into());
     }
 }
