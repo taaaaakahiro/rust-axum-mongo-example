@@ -4,7 +4,7 @@ use std::marker::PhantomData;
 #[derive(Debug)]
 pub struct Id<T> {
     pub value: i32,
-    _marker: PhantomData<T>,
+    pub _marker: PhantomData<T>,
 }
 
 impl<T> Id<T> {

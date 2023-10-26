@@ -12,7 +12,7 @@ pub struct MongoDBRepositoryImpl<T> {
 impl<T> MongoDBRepositoryImpl<T> {
     pub fn new(db: Db) -> Self {
         Self {
-            db: db,
+            db,
             _marker: PhantomData,
         }
     }

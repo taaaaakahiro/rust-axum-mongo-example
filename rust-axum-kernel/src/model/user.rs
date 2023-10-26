@@ -1,4 +1,4 @@
-use crate::model::Id;
+use crate::model::{ErrorCode, Id};
 use serde::Deserialize;
 
 #[derive(Debug)]
@@ -17,4 +17,15 @@ impl User {
 pub struct RequestUser {
     pub id: String,
     pub name: String,
+}
+
+#[derive(Debug)]
+pub struct UserGetException {
+    pub error_code: ErrorCode,
+}
+
+impl UserGetException {
+    pub fn new(error_code: ErrorCode) -> Self {
+        Self { error_code }
+    }
 }
