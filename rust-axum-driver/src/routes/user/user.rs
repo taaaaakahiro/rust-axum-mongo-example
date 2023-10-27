@@ -33,7 +33,7 @@ pub async fn get_user(
                     Ok((StatusCode::OK, Json(json)))
                 }
                 None => {
-                    tracing::info!("Succeeded to get mountain by id (None).");
+                    tracing::info!("Succeeded to get user by id (None).");
                     Err(UserError::NotFound)
                 }
             }

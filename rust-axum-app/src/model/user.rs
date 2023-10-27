@@ -6,10 +6,10 @@ pub struct SearchedUser {
 }
 
 impl From<User> for SearchedUser {
-    fn from(mountain: User) -> Self {
+    fn from(user: User) -> Self {
         Self {
-            id: mountain.id.value,
-            name: mountain.name,
+            id: user.id.value,
+            name: user.name,
         }
     }
 }
