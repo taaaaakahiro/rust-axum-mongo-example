@@ -24,12 +24,12 @@ pub async fn get_user(
 ) -> impl IntoResponse {
     let res = modules.user_use_case().get_user(user_id).await;
     match res {
-        Ok(sm) => {
-            return match sm {
-                Some(sm) => {
-                    tracing::info!("Succeeded to get user by id ({}).", &sm.id);
+        Ok(su) => {
+            return match su {
+                Some(su) => {
+                    tracing::info!("Succeeded to get user by id ({}).", &su.id);
 
-                    let json: JsonUser = sm.into();
+                    let json: JsonUser = su.into();
                     Ok((StatusCode::OK, Json(json)))
                 }
                 None => {
