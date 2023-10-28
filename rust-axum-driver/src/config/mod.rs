@@ -14,7 +14,7 @@ impl Config {
         let cfg = match envy::from_env::<Config>() {
             Ok(val) => val,
             Err(err) => {
-                tracing::error!("failed to load env. {}",err);
+                tracing::error!("failed to load env. {}", err);
                 process::exit(1);
             }
         };
@@ -42,7 +42,7 @@ mod tests {
     #[test]
     fn test_config_parse_addr_and_port() {
         let cfg = Config::new();
-         let(ip_addr, port) =  cfg.parse_addr_and_port().expect("failed to parse cfg.");
+        let (ip_addr, port) = cfg.parse_addr_and_port().expect("failed to parse cfg.");
         assert_eq!(ip_addr.is_ipv4(), true);
         assert_eq!(ip_addr.to_string(), "127.0.0.1");
         assert_eq!(port, 8080);
