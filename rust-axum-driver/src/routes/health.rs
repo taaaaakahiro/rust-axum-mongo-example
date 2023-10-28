@@ -6,7 +6,8 @@ use std::sync::Arc;
 use tracing::error;
 
 pub async fn hc() -> impl IntoResponse {
-    StatusCode::NO_CONTENT
+    tracing::info!("Success: Access health check endpoint.");
+    StatusCode::OK
 }
 
 pub async fn html() -> Html<&'static str> {
@@ -22,11 +23,11 @@ pub async fn hc_mongodb(
         .await
         .map(|_| {
             tracing::info!("Success: Access mongodb health check endpoint.");
-            StatusCode::NO_CONTENT
+            StatusCode::OK
         })
         .map_err(|err| {
             tracing::info!("Fail: Access mongodb health check endpoint.");
             error!("{:?}", err);
-            StatusCode::SERVICE_UNAVAILABLE
+            StatusCode::INTERNAL_SERVER_ERROR
         })
 }
