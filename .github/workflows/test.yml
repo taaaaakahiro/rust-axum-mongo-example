@@ -4,6 +4,8 @@ name: CI
 
 env:
   PORT: 8080
+  HOST: 127.0.0.1
+  DATABASE_URL: mongodb://root:password@localhost:27017
 
 jobs:
   build_and_test:
@@ -17,6 +19,7 @@ jobs:
       - uses: actions-rs/cargo@v1
         with:
           command: test
-          # args: -p rust-axum-driver --lib
         env:
           PORT: ${{ env.PORT }}
+          HOST: ${{ env.HOST }}
+          DATABASE_URL: ${{ env.DATABASE_URL }}
