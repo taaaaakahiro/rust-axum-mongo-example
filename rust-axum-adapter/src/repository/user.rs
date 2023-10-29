@@ -1,5 +1,6 @@
 use crate::{model::user::UserDocument, repository::MongoDBRepositoryImpl};
 use async_trait::async_trait;
+use futures_util::stream::TryStreamExt;
 use mongodb::bson::doc;
 use rust_axum_kernel::model::Id;
 use rust_axum_kernel::{model::user::User, repository::user::UserRepository};
@@ -15,6 +16,19 @@ impl UserRepository for MongoDBRepositoryImpl<User> {
             Some(md) => Ok(Some(md.try_into()?)),
             None => Ok(None),
         }
+    }
+
+    async fn list_users(&self) -> anyhow::Result<Vec<User>> {
+        let col = self.db.0.collection::<UserDocument>("users");
+        let filter = doc! {}; // 空のフィルタは全てのドキュメントを取得します
+        let mut cursor = col.find(filter, None).await?;
+        let mut users = Vec::new();
+
+        // カーソルをイテレートして全てのユーザーを収集します
+        while let Some(user_doc) = cursor.try_next().await? {
+            users.push(user_doc.try_into()?);
+        }
+        Ok(users)
     }
 }
 

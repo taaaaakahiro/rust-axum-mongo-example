@@ -1,6 +1,6 @@
 use crate::model::user::SearchedUser;
 use rust_axum_adapter::modules::RepositoriesModuleExt;
-use rust_axum_kernel::model::user::UserGetException;
+use rust_axum_kernel::model::user::{User, UserGetException};
 use rust_axum_kernel::model::ErrorCode;
 use rust_axum_kernel::repository::user::UserRepository;
 use std::sync::Arc;
@@ -24,6 +24,13 @@ impl<R: RepositoriesModuleExt> UserUseCase<R> {
                 Err(_) => Err(UserGetException::new(ErrorCode::ServerError)),
             },
             Err(error_code) => Err(UserGetException::new(error_code)),
+        }
+    }
+
+    pub async fn list_users(&self) -> Result<Vec<User>, UserGetException> {
+        match self.repositories.user_repository().list_users().await {
+            Ok(users) => Ok(users),
+            Err(_) => Err(UserGetException::new(ErrorCode::ServerError)),
         }
     }
 }

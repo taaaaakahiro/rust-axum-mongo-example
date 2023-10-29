@@ -40,4 +40,5 @@ pub enum ErrorCode {
     InvalidId,
     InvalidQueryParam,
     ServerError,
+    NotFound,
 }

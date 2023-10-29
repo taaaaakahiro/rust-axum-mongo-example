@@ -48,3 +48,16 @@ pub async fn get_user(
         }
     }
 }
+
+pub async fn list_users(Extension(modules): Extension<Arc<Modules>>) -> impl IntoResponse {
+    let result = modules.user_use_case().list_users().await;
+    match result {
+        Ok(users) => {
+            match users {
+                Some(users) => (StatusCode::OK, Json(users)),
+                None => (StatusCode::NOT_FOUND, Json(vec![])), // ユーザーが存在しない場合、空のVecを返す
+            }
+        }
+        Err(_) => (StatusCode::INTERNAL_SERVER_ERROR, Json(vec![])),
+    }
+}
