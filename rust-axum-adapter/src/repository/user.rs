@@ -22,15 +22,11 @@ impl UserRepository for MongoDBRepositoryImpl<User> {
 mod test {
 
     #[tokio::test]
-    async fn it_works() {
-        assert_eq!(1 + 2, 3);
-    }
-    #[tokio::test]
     async fn demo_test() {
-        assert_eq!(1 + 2, 3); //仮
-                              //TODO: 後で
-                              // let db = Db::new().await;
-                              // let id = "63b5700f67a2592b8942f971";
-                              // let got = MongoDBRepositoryImpl::assert_eq!(2 + 2, got.try_into());
+        assert_eq!(1 + 2, 3);
+        //TODO: 後で
+        // let db = Db::new().await;
+        // let id = "63b5700f67a2592b8942f971";
+        // let _ = MongoDBRepositoryImpl::new(db);
     }
 }
