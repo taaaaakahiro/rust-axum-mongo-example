@@ -1,4 +1,4 @@
 [
-	{"id": 1, "name": "Hoge"},
-	{"id": 2, "name": "Fuga"}
+	{"_id": 1, "name": "Hoge"},
+	{"_id": 2, "name": "Fuga"}
 ]

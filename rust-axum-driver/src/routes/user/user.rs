@@ -18,11 +18,11 @@ pub async fn post_user(
     (StatusCode::CREATED, Json("success"))
 }
 
-pub async fn get_user(
+pub async fn find_one(
     Path(user_id): Path<String>,
     Extension(modules): Extension<Arc<Modules>>,
 ) -> impl IntoResponse {
-    let res = modules.user_use_case().get_user(user_id).await;
+    let res = modules.user_use_case().find_one(user_id).await;
     match res {
         Ok(su) => {
             return match su {

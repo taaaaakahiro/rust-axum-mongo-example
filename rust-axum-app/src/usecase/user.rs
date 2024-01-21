@@ -14,9 +14,9 @@ impl<R: RepositoriesModuleExt> UserUseCase<R> {
         Self { repositories }
     }
 
-    pub async fn get_user(&self, id: String) -> Result<Option<SearchedUser>, UserGetException> {
+    pub async fn find_one(&self, id: String) -> Result<Option<SearchedUser>, UserGetException> {
         match id.try_into() {
-            Ok(id) => match self.repositories.user_repository().get_user(id).await {
+            Ok(id) => match self.repositories.user_repository().find_one(id).await {
                 Ok(user) => match user {
                     Some(user) => Ok(Some(user.into())),
                     None => Ok(None),
