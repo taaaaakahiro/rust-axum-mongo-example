@@ -5,3 +5,4 @@ members = [
     "rust-axum-app",
     "rust-axum-kernel"
 ]
+resolver = "2"

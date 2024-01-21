@@ -3,7 +3,7 @@ use crate::{
     config::Config,
     routes::{
         health::{hc, hc_mongodb},
-        user::user::{get_user, post_user},
+        user::user::{find_one, post_user},
     },
 };
 use axum::{
@@ -27,7 +27,7 @@ pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
 
     let user_router = Router::new()
         .route("/", post(post_user)) //1件登録
-        .route("/:id", get(get_user)); //1件取得
+        .route("/:id", get(find_one)); //1件取得
 
     let app = Router::new()
         .nest("/hc", hc_router)

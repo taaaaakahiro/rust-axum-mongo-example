@@ -10,9 +10,10 @@ pub struct UserDocument {
 
 impl TryFrom<UserDocument> for User {
     type Error = anyhow::Error;
-    fn try_from(user_doc: UserDocument) -> Result<Self, Self::Error> {
-        let user_id = user_doc.id.into();
-
-        Ok(User::new(user_id, user_doc.name))
+    fn try_from(document: UserDocument) -> Result<Self, Self::Error> {
+        Ok(User {
+            id: document.id.into(),
+            name: document.name,
+        })
     }
 }
