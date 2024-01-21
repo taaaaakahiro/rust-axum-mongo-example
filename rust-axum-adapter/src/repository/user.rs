@@ -50,6 +50,7 @@ mod test {
     use rust_axum_kernel::repository::user::UserRepository;
 
     #[tokio::test]
+    #[ignore]
     async fn test_find_one() {
         let db = Db::new().await;
         let repo = MongoDBRepositoryImpl::new(db.clone());
@@ -64,6 +65,7 @@ mod test {
     }
 
     #[tokio::test]
+    #[ignore]
     async fn test_find() {
         let db = Db::new().await;
         let repo = MongoDBRepositoryImpl::new(db.clone());
