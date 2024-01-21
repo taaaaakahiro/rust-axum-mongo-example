@@ -20,13 +20,21 @@ impl UserRepository for MongoDBRepositoryImpl<User> {
 
 #[cfg(test)]
 mod test {
+    use crate::persistence::mongodb::Db;
+    use crate::repository::MongoDBRepositoryImpl;
+    use rust_axum_kernel::model::user::User;
+    use rust_axum_kernel::model::Id;
+    use rust_axum_kernel::repository::user::UserRepository;
 
     #[tokio::test]
     async fn demo_test() {
-        assert_eq!(1 + 2, 3);
-        //TODO: 後で
-        // let db = Db::new().await;
-        // let id = "63b5700f67a2592b8942f971";
-        // let _ = MongoDBRepositoryImpl::new(db);
+        let user_id = 123; // i32 に変更
+        let db = Db::new().await;
+        let repo = MongoDBRepositoryImpl::new(db.clone());
+
+        let result = repo.get_user(Id::<User>::new(user_id)).await;
+        assert!(result.is_ok());
+        let option = result.expect("failed to get user");
+        assert!(option.is_none());
     }
 }
