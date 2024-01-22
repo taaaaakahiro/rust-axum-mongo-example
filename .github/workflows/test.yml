@@ -6,11 +6,23 @@ env:
   PORT: 8080
   HOST: 127.0.0.1
   DATABASE_URL: mongodb://root:password@localhost:27017
+  DATABASE_NAME: example
 
 jobs:
   build_and_test:
     name: Rust project
     runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: password
+          MONGO_INITDB_DATABASE: example
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
@@ -23,3 +35,5 @@ jobs:
           PORT: ${{ env.PORT }}
           HOST: ${{ env.HOST }}
           DATABASE_URL: ${{ env.DATABASE_URL }}
+          DATABASE_NAME: ${{ env.DATABASE_NAME }}
+          RUST_LOG: debug

@@ -24,7 +24,6 @@ mod tests {
     use crate::repository::health_check::HealthCheckRepository;
 
     #[tokio::test]
-    #[ignore]
     async fn check_mongo_db() -> anyhow::Result<()> {
         let db = Db::new().await;
         let repo = HealthCheckRepository::new(db);
