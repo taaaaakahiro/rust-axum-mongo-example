@@ -11,6 +11,16 @@ jobs:
   build_and_test:
     name: Rust project
     runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo
+        ports:
+          - 27017:27017
+        env:
+          MONGO_INITDB_ROOT_USERNAME: root
+          MONGO_INITDB_ROOT_PASSWORD: password
+
     steps:
       - uses: actions/checkout@v2
       - uses: actions-rs/toolchain@v1
