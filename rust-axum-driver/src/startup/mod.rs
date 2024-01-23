@@ -9,7 +9,7 @@ use crate::{
 use axum::{
     http::Method,
     routing::{get, post},
-    Extension, Router,
+    serve, Extension, Router,
 };
 use dotenv::dotenv;
 use std::net::SocketAddr;
@@ -18,8 +18,8 @@ use tower_http::cors::{Any, CorsLayer};
 
 pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
     let cors = CorsLayer::new()
-        .allow_methods([Method::GET, Method::OPTIONS])
-        .allow_origin(Any);
+        .allow_origin(Any)
+        .allow_methods([Method::GET, Method::OPTIONS]);
 
     let hc_router = Router::new()
         .route("/", get(hc))
@@ -35,14 +35,15 @@ pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
         .layer(Extension(modules))
         .layer(cors);
 
-    let (ip_addr, port) = cfg.parse_addr_and_port().expect("Failed to parse address.");
+    let (ip_addr, port) = cfg.parse_addr_and_port().expect("failed to parse address");
     let addr = SocketAddr::from((ip_addr, port));
     tracing::info!("Server Listening on {}", addr);
 
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
+    let listener = tokio::net::TcpListener::bind(format!("{}", addr))
         .await
-        .unwrap_or_else(|_| panic!("Server cannot launch!"))
+        .unwrap();
+
+    serve(listener, app).await.expect("failed to serve api");
 }
 
 pub fn init_app() {
