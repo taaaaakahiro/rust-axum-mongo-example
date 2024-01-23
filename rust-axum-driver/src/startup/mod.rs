@@ -41,9 +41,9 @@ pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
 
     let listener = tokio::net::TcpListener::bind(format!("{}", addr))
         .await
-        .expect("failed to serve api");
+        .unwrap();
 
-    serve(listener, app).await.unwrap();
+    serve(listener, app).await.expect("failed to serve api");
 }
 
 pub fn init_app() {
