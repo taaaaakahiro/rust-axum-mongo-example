@@ -9,7 +9,7 @@ use crate::{
 use axum::{
     http::Method,
     routing::{get, post},
-    Extension, Router,
+    serve, Extension, Router,
 };
 use dotenv::dotenv;
 use std::net::SocketAddr;
@@ -18,8 +18,8 @@ use tower_http::cors::{Any, CorsLayer};
 
 pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
     let cors = CorsLayer::new()
-        .allow_methods([Method::GET, Method::OPTIONS])
-        .allow_origin(Any);
+        .allow_origin(Any)
+        .allow_methods([Method::GET, Method::OPTIONS]);
 
     let hc_router = Router::new()
         .route("/", get(hc))
@@ -39,10 +39,11 @@ pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
     let addr = SocketAddr::from((ip_addr, port));
     tracing::info!("Server Listening on {}", addr);
 
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
+    let listener = tokio::net::TcpListener::bind(format!("{}", addr))
         .await
-        .unwrap_or_else(|_| panic!("Server cannot launch!"))
+        .unwrap();
+
+    serve(listener, app).await.unwrap();
 }
 
 pub fn init_app() {
