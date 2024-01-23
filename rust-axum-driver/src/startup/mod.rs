@@ -35,13 +35,13 @@ pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
         .layer(Extension(modules))
         .layer(cors);
 
-    let (ip_addr, port) = cfg.parse_addr_and_port().expect("Failed to parse address.");
+    let (ip_addr, port) = cfg.parse_addr_and_port().expect("failed to parse address");
     let addr = SocketAddr::from((ip_addr, port));
     tracing::info!("Server Listening on {}", addr);
 
     let listener = tokio::net::TcpListener::bind(format!("{}", addr))
         .await
-        .unwrap();
+        .expect("failed to serve api");
 
     serve(listener, app).await.unwrap();
 }
