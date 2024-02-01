@@ -52,29 +52,92 @@ mod test {
     #[tokio::test]
     #[ignore]
     async fn test_find_one() {
-        let db = Db::new().await;
-        let repo = MongoDBRepositoryImpl::new(db.clone());
+        struct Test {
+            _name: &'static str,
+            user_id: i32,
+            want: Option<User>,
+        }
 
-        let id = 1;
-        let result = repo.find_one(Id::<User>::new(id)).await;
-        assert!(result.is_ok());
-        let option = result.expect("failed to get user");
-        assert!(option.is_some());
-        let got = option.unwrap();
-        assert_eq!(&got.name, "Hoge");
+        let tests = vec![
+            Test {
+                _name: "ok1",
+                user_id: 1,
+                want: Some(User {
+                    id: Id::new(1),
+                    name: "Hoge".to_string(),
+                }),
+            },
+            Test {
+                _name: "ok2",
+                user_id: 2,
+                want: Some(User {
+                    id: Id::new(2),
+                    name: "Fuga".to_string(),
+                }),
+            },
+            Test {
+                _name: "ng",
+                user_id: 999,
+                want: None, // Expecting None for a non-existent user
+            },
+        ];
+
+        for test in tests {
+            let result = get_repo()
+                .await
+                .find_one(Id::<User>::new(test.user_id))
+                .await;
+
+            match result {
+                Ok(Some(got)) => {
+                    let want = test.want.unwrap();
+                    assert_eq!(got.id.value, want.id.value);
+                    assert_eq!(got.name, want.name);
+                }
+                Ok(None) => {
+                    assert!(test.want.is_none(), "Expected Some, got None");
+                }
+                Err(_) => {
+                    panic!("Failed to get user");
+                }
+            }
+        }
     }
 
     #[tokio::test]
     #[ignore]
     async fn test_find() {
-        let db = Db::new().await;
-        let repo = MongoDBRepositoryImpl::new(db.clone());
-        let result = repo.find().await;
+        struct Test {
+            _name: &'static str,
+            want: Vec<User>,
+        }
+        let tests = vec![Test {
+            _name: "ok",
+            want: vec![
+                User {
+                    id: Id::new(1),
+                    name: "Hoge".to_string(),
+                },
+                User {
+                    id: Id::new(2),
+                    name: "Fuga".to_string(),
+                },
+            ],
+        }];
 
-        assert!(result.is_ok());
-        let users = result.expect("Failed to get users");
-        assert_eq!(users.len(), 2);
-        assert_eq!(users[0].name, "Hoge");
-        assert_eq!(users[1].name, "Fuga");
+        for test in tests {
+            let got = get_repo().await.find().await.expect("failed to get users");
+            assert_eq!(got.len(), test.want.len(), "Lengths do not match");
+
+            for (got_user, expected_user) in got.iter().zip(test.want.iter()) {
+                assert_eq!(got_user.id.value, expected_user.id.value);
+                assert_eq!(got_user.name, expected_user.name);
+            }
+        }
+    }
+
+    async fn get_repo() -> MongoDBRepositoryImpl<User> {
+        let db = Db::new().await;
+        MongoDBRepositoryImpl::new(db.clone())
     }
 }
