@@ -48,3 +48,24 @@ pub async fn find_one(
         }
     }
 }
+
+pub async fn find(Extension(modules): Extension<Arc<Modules>>) -> impl IntoResponse {
+    let res = modules.user_use_case().find().await;
+
+    match res {
+        Ok(searched_users) => {
+            let json_users: Vec<JsonUser> =
+                searched_users.into_iter().map(|su| su.into()).collect();
+            Ok((StatusCode::OK, Json(json_users)))
+        }
+        Err(get_ex) => {
+            error!("{:?}", get_ex);
+            let error_response: Result<(), UserError> = match &get_ex.error_code {
+                ErrorCode::InvalidId => Err(UserError::NotFound),
+                _ => Err(UserError::ServerError),
+            };
+
+            Err(error_response.into_response())
+        }
+    }
+}

@@ -1,4 +1,5 @@
 use crate::module::Modules;
+use crate::routes::user::user::find;
 use crate::{
     config::Config,
     routes::{
@@ -27,7 +28,8 @@ pub async fn startup(cfg: &Config, modules: Arc<Modules>) {
 
     let user_router = Router::new()
         .route("/", post(post_user)) //1件登録
-        .route("/:id", get(find_one)); //1件取得
+        .route("/:id", get(find_one)) //1件取得
+        .route("/", get(find)); //複数件取得
 
     let app = Router::new()
         .nest("/hc", hc_router)

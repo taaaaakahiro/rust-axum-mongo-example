@@ -29,3 +29,18 @@ impl UserGetException {
         Self { error_code }
     }
 }
+
+#[derive(Debug)]
+pub struct UserFindException {
+    pub error_code: ErrorCode,
+    pub messages: Vec<String>,
+}
+
+impl UserFindException {
+    pub fn new(error_code: ErrorCode, messages: Vec<String>) -> Self {
+        Self {
+            error_code,
+            messages,
+        }
+    }
+}
